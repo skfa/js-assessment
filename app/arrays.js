@@ -15,8 +15,9 @@ exports.arraysAnswers = {
   },
 
   removeWithoutCopy : function(arr, item) {
-    arr = arr.filter(function(e){ return item!==e});
-
+    while(arr.indexOf(item)!== -1){
+      arr.splice(arr.indexOf(item),1);
+    }
     return arr;
   },
 

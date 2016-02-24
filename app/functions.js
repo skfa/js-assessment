@@ -17,7 +17,11 @@ exports.functionsAnswers = {
   },
 
   makeClosures : function(arr, fn) {
-
+     return arr.map(function(e){
+       return function(){
+         return fn.call(null,e);
+       }
+     });
   },
 
   partial : function(fn, str1, str2) {
@@ -33,13 +37,20 @@ exports.functionsAnswers = {
   },
 
   callIt : function(fn) {
-    Array.prototype.splice.call(arguments, 0,1)
-    return fn.apply(null, arguments);
+    var temp = [];
+   for(var i=1;i<arguments.length;i++){
+     temp.push(arguments[i]);
+   }
+
+    return fn.apply(null, temp);
   },
 
   partialUsingArguments : function(fn) {
-    Array.prototype.splice.call(arguments,0,1);
-    var that_arg = arguments;
+
+    var that_arg = [];
+    for(var i=1;i<arguments.length;i++){
+      that_arg.push(arguments[i]);
+    }
       return function () {
         Array.prototype.forEach.call(arguments, function (e) {
           that_arg.push(e);
