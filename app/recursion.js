@@ -26,7 +26,7 @@ exports.recursionAnswers = {
   },
 
   permute: function(arr) {
-    var arr1 = JSON.parse(JSON.stringify(arr)), op = [];
+   /* var arr1 = JSON.parse(JSON.stringify(arr)), op = [];
     function getKey(ar){
       return ar.reduce(function (c,p) {
         return c+','+p;
@@ -50,7 +50,27 @@ exports.recursionAnswers = {
 
       }
     }
-      return op.map(function(e){ return e.val;});
+      return op.map(function(e){ return e.val;});*/
+
+    var temp = [],
+        arr1 = [];
+
+    function perm(ar) {
+      var i, ch;
+      for (i = 0; i < ar.length; i++) {
+        ch = ar.splice(i, 1)[0];
+        arr1.push(ch);
+        if (ar.length == 0) {
+          temp.push(arr1.slice());
+        }
+        perm(ar);
+        ar.splice(i, 0, ch);
+        arr1.pop();
+      }
+      return temp;
+    };
+
+    return perm(arr)
 
   },
 
